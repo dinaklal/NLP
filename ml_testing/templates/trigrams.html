@@ -72,7 +72,7 @@ height:600px !important;}
     <hr>
 
     <div class ="row">
-      <div class="col-sm-1">
+      <div class="col-md-2">
 <table class='table  table-hover ' border="1" style='background-color:rgba(103, 121, 201, 0.7)  ;padding-top:10px';>
 
 <tr >
@@ -86,17 +86,77 @@ height:600px !important;}
 </tr>
 <tr>
   <td>
-    <button class="btn btn-lg btn-primary  btn-block"> Create Report</button>
+    <button class="btn btn-lg btn-primary  btn-block" onclick="window.location.href='report'"> Create Report</button>
   </td>
 </tr>
-<tr>
-  <td>
-    <button class="btn btn-lg btn-primary  btn-block"> Create Report</button>
+  <tr>
+     <td>
+    <button class="btn btn-lg btn-primary  btn-block" onclick="window.location.href='grams?n=2'"> Get Bigrams</button>
   </td>
 </tr>
+      <tr>
+     <td>
+    <button class="btn btn-lg btn-primary  btn-block" onclick="window.location.href='grams?n=3'"> Get Trigrams</button>
+  </td>
+</tr>
+
+    </tr>
+      <tr>
+     <td>
+    <button class="btn btn-lg btn-primary  btn-block" onclick="window.location.href='grams?n=3'"> Get Probabilities</button>
+  </td>
+</tr>
+
+       </tr>
+      <tr>
+     <td>
+    <button class="btn btn-lg btn-primary  btn-block" onclick="window.location.href='grams?n=3'"> Try OOV</button>
+  </td>
+</tr>
+
 
 
 </table>
+      </div>
+
+<div class="col-md-9">
+          <table class='table  table-hover ' border="1" style='background-color:rgba(0,228, 251,0.7);padding-top:10px';>
+    <tr>
+         <div class="col-md-4">
+        <td>
+              {{ content }}......<br>
+            <h3> Corpus Created</h3>
+        </td>
+              </div>
+         <div class="col-md-4">
+        <td>
+              {{ bigrams }}......<br><br>
+              {{ trigrams }}......<br>
+            <h3> Bigrams and Trigrams  Created</h3>
+        </td>
+              </div>
+    </tr>
+              <tr>
+        <div class="col-md-8">
+         <td>
+            <h3> Raw Word Count : {{ report.word_count}}</h3><br>
+            <h3> Bigram Count : {{ report.bigram_count}}</h3><br>
+             <h3> Trigram Count : {{ report.trigram_count }}</h3><br>
+         </td>
+             <td >
+                 <div style="height:300px; overflow-y: auto;">
+                     <h2>Trigrams</h2>
+                 {% for i in trigram%}
+                     <b> {{ i     }}</b><br>
+                 {% endfor %}
+                 </div>
+         </td>
+
+              </tr>
+          </table>
+</div>
+
+
       <script src="{% static 'js/jquery.min.js'  %}"></script>
 
       <script src="{% static 'js/in_script.js' %}"></script>
