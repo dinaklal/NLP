@@ -115,33 +115,77 @@ height:600px !important;}
 </tr>
 
 
+
 </table>
       </div>
 
 <div class="col-md-9">
           <table class='table  table-hover ' border="1" style='background-color:rgba(0,228, 251,0.7);padding-top:10px';>
-    <tr>
-         <div class="col-md-4">
-        <td>
-              {{ content }}......<br>
-            <h3> Corpus Created</h3>
-        </td>
-              </div>
-         <div class="col-md-4">
-        <td>
-              {{ bigrams }}......<br><br>
-              {{ trigrams }}......<br>
-            <h3> Bigrams and Trigrams  Created</h3>
-        </td>
-              </div>
-    </tr>
+         <form action="custom" method="POST">
+     {% csrf_token %}
+               <tr>
+            <div class="col-md-4">
+            <td>
+                <h3> Get Next Word Probability </h3>
+<div class="form-group">
+            <span class="label label-primary">Type Word</span>
+               <input type="text"  class="form-control" name = "words"   required><br>
+       </div>
+
+                  <div class="col-md-4">
+
+            <td class="col-md-4">
+                <br><br><br>
+               <button class="btn btn-lg btn-success  btn-block" type="submit">Get Next Words </button>
+            </td>
+                  </div>
+             </form>
+
+
               <tr>
-        <div class="col-md-8">
-         <td>
-            <h3> Raw Word Count : {{ report.word_count}}</h3><br>
-            <h3> Bigram Count : {{ report.bigram_count}}</h3><br>
-             <h3> Trigram Count : {{ report.trigram_count }}</h3><br>
-         </td>
+                   <form action="spell" method="POST">
+     {% csrf_token %}
+               <tr>
+            <div class="col-md-4">
+            <td>
+                <h3> Get OOV Words / Similar Words </h3>
+<div class="form-group">
+            <span class="label label-primary">Type Word</span>
+               <input type="text"  class="form-control" name = "word"   required><br>
+       </div>
+
+                  <div class="col-md-4">
+
+            <td class="col-md-4">
+                <br><br><br>
+               <button class="btn btn-lg btn-success  btn-block" type="submit">Get Similar Words </button>
+            </td>
+                  </div>
+             </form>
+
+
+              <tr>
+
+ <table class='table  table-hover ' border="1" style='background-color:rgba(0,240, 251,0.7);padding-top:10px';>
+     <h2 style="color: azure;">Using FastText Model trained Instantly</h2>
+     <thead>
+     <th><h3>{{inp}}</h3></th>
+     </thead>
+     <thead>
+         <th>Possible String</th>
+
+     <th> Probability</th>
+
+     </thead>
+     <tbody>
+     {%  for u in similar %}
+     <tr>
+        <b></b> <td>{{u.item}}</td>
+      <td>{{u.p}}</td></b>
+     </tr>
+     {% endfor %}
+     </tbody>
+ </table>
 
               </tr>
           </table>

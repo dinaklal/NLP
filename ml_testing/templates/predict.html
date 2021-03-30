@@ -103,7 +103,7 @@ height:600px !important;}
     </tr>
       <tr>
      <td>
-    <button class="btn btn-lg btn-primary  btn-block" onclick="window.location.href='getp'"> Get Probabilities</button>
+    <button class="btn btn-lg btn-primary  btn-block" onclick="window.location.href='grams?n=3'"> Get Probabilities</button>
   </td>
 </tr>
 
@@ -115,33 +115,97 @@ height:600px !important;}
 </tr>
 
 
+
 </table>
       </div>
 
 <div class="col-md-9">
           <table class='table  table-hover ' border="1" style='background-color:rgba(0,228, 251,0.7);padding-top:10px';>
-    <tr>
-         <div class="col-md-4">
-        <td>
-              {{ content }}......<br>
-            <h3> Corpus Created</h3>
-        </td>
-              </div>
-         <div class="col-md-4">
-        <td>
-              {{ bigrams }}......<br><br>
-              {{ trigrams }}......<br>
-            <h3> Bigrams and Trigrams  Created</h3>
-        </td>
-              </div>
-    </tr>
+         <tr>
+            <div class="col-md-4">
+            <td>
+                <h3> Get Next Word </h3>
+        <form action="getp" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+            <span class="label label-primary">Select Bigram:</span>
+        <select class="form-control" class="form-control" id="sel1" name="bigram" required>
+
+       {% for u in bigram  %}
+
+        <option value="{{ u }}">{{ u }}
+           </option  >
+        {% endfor %}
+
+
+          </select>
+            </div>
+            </td>
+            </div>
+
+                  <div class="col-md-4">
+                      <INPUT TYPE="hidden" name="n" value="2">
+            <td class="col-md-4">
+                <br><br><br>
+               <button class="btn btn-lg btn-success  btn-block" type="submit">Get Next Words </button>
+            </td>
+                  </div>
+             </form>
+         </tr>
+ <form action="getp" method="POST">
+     {% csrf_token %}
+               <tr>
+            <div class="col-md-4">
+            <td>
+                <h3> Get Next Word </h3>
+
+            <div class="form-group">
+            <span class="label label-primary">Select Trigram:</span>
+        <select class="form-control" class="form-control" id="sel" name="trigram" required>
+
+       {% for u in trigram  %}
+
+        <option value="{{ u }}">{{ u }}
+           </option  >
+        {% endfor %}
+
+
+          </select>
+            </div>
+            </td>
+            </div>
+
+                  <div class="col-md-4">
+                      <INPUT TYPE="hidden" name="n" value="3">
+            <td class="col-md-4">
+                <br><br><br>
+               <button class="btn btn-lg btn-success  btn-block" type="submit">Get Next Words </button>
+            </td>
+                  </div>
+         </tr>
+ </form>
+
               <tr>
-        <div class="col-md-8">
-         <td>
-            <h3> Raw Word Count : {{ report.word_count}}</h3><br>
-            <h3> Bigram Count : {{ report.bigram_count}}</h3><br>
-             <h3> Trigram Count : {{ report.trigram_count }}</h3><br>
-         </td>
+
+ <table class='table  table-hover ' border="1" style='background-color:rgba(0,240, 251,0.7);padding-top:10px';>
+     <thead>
+     <th><h3>{{inp}}</h3></th>
+     </thead>
+     <thead>
+         <th>Possible String</th>
+     <th> Count</th>
+     <th> Probability</th>
+
+     </thead>
+     <tbody>
+     {%  for u in out %}
+     <tr>
+        <b></b> <td>{{u.item}}</td>
+         <td>{{u.count}}</td><td>{{u.p}}</td></b>
+     </tr>
+     {% endfor %}
+     </tbody>
+ </table>
 
               </tr>
           </table>
