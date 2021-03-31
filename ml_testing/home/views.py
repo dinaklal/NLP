@@ -16,16 +16,10 @@ quadrigrams_list = []
 model_ted = ''
 def home(request):
     username = request.user.username
-
-
-
-
-
-
-    #items = [{"id" :"1","name":"Pizza"},{"id":"2","name":"Meals"}]
-    #output_customers = [{'customer':'71343247','items':['burger','pizza']},{'customer':'71343246','items':['meals<br>','pizza<br>','meals<br>','pizza','meals','pizza','meals','pizza']}]
-
-    return render(request, 'home.html')
+    if username == 'project':
+      return render(request, 'home2.html')
+    else:
+      return render(request, 'home.html')
 
 def fetch_corpus(request):
   #pages = ['Sachin_Tendulkar','Virat_Kohli','Sourav_Ganguly','Sunil_Gavaskar','Kapil_Dev','Anil_Kumble','Dilip_Vengsarkar','Mohammad_Azharuddin','Dhoni_','Rohit_Sharma' ]
